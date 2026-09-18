@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+
 public class MainGUI extends JFrame {
     private JTextField idField;
     private JTextField titleField;
@@ -102,13 +102,15 @@ public class MainGUI extends JFrame {
         String date;
         String location;
         int maxParticipants;
-        public session(int Id, String title, String mentor, String date, String location, int maxParticipants){
+        int participants;
+        public session(int Id, String title, String mentor, String date, String location, int maxParticipants, int participants){
             this.Id = Id;
             this.title= title;
             this.mentor= mentor;
             this.date=date;
             this.location=location;
             this.maxParticipants=maxParticipants;
+            this.participants=participants;
 
         }
 
@@ -126,11 +128,14 @@ public class MainGUI extends JFrame {
             String date = dateField.getText();
             String location = locationField.getText();
             int maxParticipants = Integer.parseInt(maxField.getText());
+            int participants=0;
+
+
 
             // TO DO: construct a session object, insert it into
             // the list of sessions\
 
-            session newSession= new session(id, title, mentor, date, location, maxParticipants);
+            session newSession= new session(id, title, mentor, date, location, maxParticipants,participants);
             session= new session_list(newSession,session);
 
 
@@ -278,7 +283,27 @@ public class MainGUI extends JFrame {
         int id = Integer.parseInt(idField.getText());
         // increment participants field of session,
         // print success or failure message.
+        session_list current= session;
+        while (current != null){
+            if (current.first.Id==id){
+                if (current.first.participants<current.first.maxParticipants){
+                    current.first.participants+=1;
+
+                }
+                else{
+                    outputArea.append("amount of partcipants is max");
+                }
+
+            }
+            else{
+                current=current.rest;
+            }
+        }
+
+
     }
+
+
 
     public static void main(String[] args) {
         new MainGUI();
