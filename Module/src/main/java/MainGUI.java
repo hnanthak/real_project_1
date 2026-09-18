@@ -94,6 +94,28 @@ public class MainGUI extends JFrame {
         // Put the cursor back in the first field
         idField.requestFocus();
     }
+    //creating classes
+    public class session{
+        int Id;
+        String title;
+        String mentor;
+        String date;
+        String location;
+        int maxParticipants;
+        public session(int Id, String title, String mentor, String date, String location, int maxParticipants){
+            this.Id = Id;
+            this.title= title;
+            this.mentor= mentor;
+            this.date=date;
+            this.location=location;
+            this.maxParticipants=maxParticipants;
+
+        }
+
+    }
+    public record session_list(session first, session_list rest){}
+
+    static session_list session = null;
 
     // the action of the Add Session button
     private void addSession() {
@@ -106,7 +128,12 @@ public class MainGUI extends JFrame {
             int maxParticipants = Integer.parseInt(maxField.getText());
 
             // TO DO: construct a session object, insert it into
-            // the list of sessions
+            // the list of sessions\
+
+            session newSession= new session(id, title, mentor, date, location, maxParticipants);
+            session= new session_list(newSession,session);
+
+
 
             outputArea.setText("Session Added Successfully\n");
             // Clear the input fields
@@ -127,18 +154,66 @@ public class MainGUI extends JFrame {
 
         // between each one, print a separator line,
         // as e.g.
-
-        outputArea.append("\n--------------------\n");
+        session_list current=session;
+        while (current != null){
+            outputArea.append("ID: "+current.first.Id+" - ");
+            outputArea.append("Title: "+current.first.title+" - ");
+            outputArea.append("Mentor: "+current.first.mentor+" - ");
+            outputArea.append("Date: "+current.first.Id+" - ");
+            outputArea.append("Location: "+current.first.location+" - ");
+            outputArea.append("Max_participants: "+current.first.maxParticipants+" - ");
+            current= current.rest;
+        }
     }
+    public static session searchByID(int id){
+        session_list current=session;
+        while(current != null){
+            if (current.first.Id == id){
+                return current.first;
+            } else{
+                current= current.rest;
+            }
+        }
+        return null;
+    }
+    public static session_list searchByMentor(String Mentor){
+        session_list current=session;
+        session_list  name_list = null;
+        while(current != null){
+            if (current.first.mentor.equals(Mentor)){
+
+                name_list= new session_list(current.first, name_list);
+                current= current.rest;
+            } else{
+                current= current.rest;
+            }
+        }
+        return name_list;
+    }
+
+
+
 
     // search by ID if presesnt, mentor otherwise, display results
     private void searchSession() {
         // Search by ID if the ID field is not empty
+        session_list current =session;
         if (!idField.getText().trim().isEmpty()) {
             int id = Integer.parseInt(idField.getText().trim());
             // find session by ID, using a `searchByID` method
-            // ... code here ...
+            // ... code here ..
+            session session1 = searchByID(id);
+            if (session1!=null){
+                outputArea.append("ID: "+session1.Id+" - ");
+                outputArea.append("Title: "+session1.title+" - ");
+                outputArea.append("Mentor: "+session1.mentor+" - ");
+                outputArea.append("Date: "+session1.date+" - ");
+                outputArea.append("Location: "+session1.location+" - ");
+                outputArea.append("Max_participants: "+session1.maxParticipants+" - ");
+            }
+
             /* if (result != null)
+
                 // display session to the output area...
             else
                 outputArea.setText("Session not found.");
@@ -150,6 +225,15 @@ public class MainGUI extends JFrame {
             // find session by mentor. In this case, the result
             // may be a list of sessions...
             // ... code here ...
+            session_list session2 = searchByMentor(mentor);
+            if (session2!=null){
+                outputArea.append("ID: "+session2.Id+" - ");
+                outputArea.append("Title: "+session2.title+" - ");
+                outputArea.append("Mentor: "+session2.mentor+" - ");
+                outputArea.append("Date: "+session2.date+" - ");
+                outputArea.append("Location: "+session2.location+" - ");
+                outputArea.append("Max_participants: "+session2.maxParticipants+" - ");
+            }
             /*
             if (result != null)
                 // display all sessions in the list
@@ -164,11 +248,30 @@ public class MainGUI extends JFrame {
     }
 
     // given an id, remove that session from the list
+    public static session_list removeByID(session_list list, int id){
+        if (list==null){
+            return null;
+        }
+        else if (list.first.Id==id){
+            return list.rest;
+        }
+        return new session_list(list.first, removeByID(list.rest,id));
+    }
     private void removeSession() {
         int id = Integer.parseInt(idField.getText());
         // remove the session, print an error to the outputArea
         // if it's not found
         // ... code here ...
+        session session3= removeByID(session, id);
+        if (session3!=null){
+            outputArea.append("ID: "+session3.Id+" - ");
+            outputArea.append("Title: "+session3.title+" - ");
+            outputArea.append("Mentor: "+session3.mentor+" - ");
+            outputArea.append("Date: "+session3.date+" - ");
+            outputArea.append("Location: "+session3.location+" - ");
+            outputArea.append("Max_participants: "+session.maxParticipants+" - ");
+        }
+
     }
 
     // add one to the count of the specified session.
