@@ -255,6 +255,7 @@ public class MainGUI extends JFrame {
         else if (list.first.Id==id){
             return list.rest;
         }
+        session= new session_list(list.first, removeByID(list.rest,id));
         return new session_list(list.first, removeByID(list.rest,id));
     }
     private void removeSession() {
@@ -262,14 +263,11 @@ public class MainGUI extends JFrame {
         // remove the session, print an error to the outputArea
         // if it's not found
         // ... code here ...
-        session session3= removeByID(session, id);
-        if (session3!=null){
-            outputArea.append("ID: "+session3.Id+" - ");
-            outputArea.append("Title: "+session3.title+" - ");
-            outputArea.append("Mentor: "+session3.mentor+" - ");
-            outputArea.append("Date: "+session3.date+" - ");
-            outputArea.append("Location: "+session3.location+" - ");
-            outputArea.append("Max_participants: "+session.maxParticipants+" - ");
+        if (searchByID(id)!=null){
+            outputArea.append("error:session id not found");
+        }
+        else{
+            removeByID(session,id);
         }
 
     }
