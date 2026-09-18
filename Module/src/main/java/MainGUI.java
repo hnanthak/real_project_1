@@ -226,13 +226,13 @@ public class MainGUI extends JFrame {
             // may be a list of sessions...
             // ... code here ...
             session_list session2 = searchByMentor(mentor);
-            if (session2!=null){
-                outputArea.append("ID: "+session2.Id+" - ");
-                outputArea.append("Title: "+session2.title+" - ");
-                outputArea.append("Mentor: "+session2.mentor+" - ");
-                outputArea.append("Date: "+session2.date+" - ");
-                outputArea.append("Location: "+session2.location+" - ");
-                outputArea.append("Max_participants: "+session2.maxParticipants+" - ");
+            while (session2!=null){
+                outputArea.append("ID: "+session2.first.Id+" - ");
+                outputArea.append("Title: "+session2.first.title+" - ");
+                outputArea.append("Mentor: "+session2.first.mentor+" - ");
+                outputArea.append("Date: "+session2.first.date+" - ");
+                outputArea.append("Location: "+session2.first.location+" - ");
+                outputArea.append("Max_participants: "+session2.first.maxParticipants+" - ");
             }
             /*
             if (result != null)
