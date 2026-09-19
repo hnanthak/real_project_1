@@ -1,0 +1,77 @@
+September 16 - 5:00 p.m
+After reading over the lab again Shreya decided to create a private variable name sessioin, however errors occured since the session was not defined.
+Stopped working: 5:25 p.m
+
+September 16 - 5:30 p.m
+We tried to figure out the error and created a new class for session to build the data for all the single mentorship sessions. I created a constructor with the specific value types into the GUI.
+Stopped working: 5:50 p.m
+
+September 16 - 7:00 p.m
+We then added the increment number for the participants to add 1 if the current participant is less than the max participant. Then we created the linked list for the session linked list to know where the list begins from.
+Stopped working: 7:30 p.m
+
+September 16 - 8:30 p.m
+I (Shreya ) then started to implement the SessionLinkedList, where I created the Node class in order to store the session and so that it has the reference to the next node. I added the first variable to it for an empty linked list.
+Stopped working: 9:00 p.m
+
+September 16 - 9:00 p.m
+I (Shreya) also created a containsId to check the linked list and to make sure there are no duplicate id’s being created.
+Stopped working: 9:20 p.m
+
+September 17 - 8:30 a.m
+When I tested the program it was working fine so far
+Stopped working: 8:35 p.m
+
+September 17 - 9:00 a.m
+We decided that making the structure more complicated so we removed the separate session.java class and created the session class directly insde the MainGUI. So we moved the session varaibles and constructor into this class.
+Stopped working: 9:30 a.m
+
+September 17 - 2:00 p.m
+Once we changed the structure, I (Shreya) created session list record to store the session as a linked list. To store the current session we used first and to refer to the rest of the list I used rest. I then also set the intial session list to null to start it as an empty list.
+Stopped working: 2:15 p.m
+
+September 17 - 2:30 p.m
+Then I (Shreya )worked on the add session button. For that I took the information which was entered into the GUI fields and converted the ID and the max participants to integers. I then created a new session object, and added it in front of the session_list.
+Stopped working: 2:50 p.m
+
+September 17 - 3:00 p.m
+Shreya and Harshita then tested by adding different sessions and displying them.
+Stopped working: 3:10 p.m
+
+September 17 - 4:00 p.m
+I (Harishita) worked on the display function, which goes through the linked list by using the currrent and display the id, title, mentor, date, location, and the maximum participants.
+Stopped working: 4:15
+
+September 17 - 4:20 p.m
+I (Harshita) worked on creating the searchById so it goes through the linked list and returns the session when the id matches the one you are searching for.
+Similarly, I (Harshita) worked on searchByMentor to create a new list containing the sessions and searches the mentor requested for.
+Stopped working: 4:45 p.m
+
+September 17 - 6:30 p.m
+I (Harshita) created the mentor search using the while loop.
+I then worked on the register the participant button so the method goes through the linked list and finds the matching session id.
+Stopped working: 6:50 p.m
+
+September 18 - 10:00 a.m
+If the number of the current participants was below the maximum number then the count went up by one.
+I added the successfull registeratin message when the session is full and the id can not be found.
+Stopped working: 10:15 a.m
+
+September 18 - 10:15 a.m
+I (Harshita) had problem with fetching the code in git and lost the code so I had to ask the professor to help me.
+Even after fixing the git issues the code did not transfer to Shreya's git so and with the help of professor we figured out that the code was pushing somewhere else.
+Stopped working: 10: 45 a.m
+
+September 18 - 10:50 a.m
+We figured out how to get it on Shreya's git and was able to fetch, push and pull it.
+Stopped working: 10:55 a.m
+
+September 18 - 1:30 p.m
+I worked on the Remove button and created the removeById through recursive method so it searches through the linked list and returns a new list without the session which matches the given ID.
+I also changed the main for session list to the result of removeById so session was actually removed from the stored list.
+Stopped working: 2:00 p.m
+
+September 18 - 6:00 p.m
+I (Shreya) tested the code and found an error with capitalization and case-sensitive for removeById.
+After fixing the code I ran the adding, displaying, registerning, removing sessions, to make sure they work.
+Stopped working: 6:30 p.m

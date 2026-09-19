@@ -161,12 +161,12 @@ public class MainGUI extends JFrame {
         // as e.g.
         session_list current=session;
         while (current != null){
-            outputArea.append("ID: "+current.first.Id+" - ");
-            outputArea.append("Title: "+current.first.title+" - ");
-            outputArea.append("Mentor: "+current.first.mentor+" - ");
-            outputArea.append("Date: "+current.first.Id+" - ");
-            outputArea.append("Location: "+current.first.location+" - ");
-            outputArea.append("Max_participants: "+current.first.maxParticipants+" - ");
+            outputArea.append("\n ID: "+current.first.Id);
+            outputArea.append("\n Title: "+current.first.title);
+            outputArea.append("\n Mentor: "+current.first.mentor);
+            outputArea.append("\n Date: "+current.first.date);
+            outputArea.append("\n Location: "+current.first.location);
+            outputArea.append("\n Max_participants: "+current.first.maxParticipants);
             current= current.rest;
         }
     }
@@ -186,12 +186,13 @@ public class MainGUI extends JFrame {
         session_list  name_list = null;
         while(current != null){
             if (current.first.mentor.equals(Mentor)){
-
-                name_list= new session_list(current.first, name_list);
-                current= current.rest;
-            } else{
-                current= current.rest;
+                name_list = new session_list(current.first, name_list);
+                //current= current.rest;
             }
+            current= current.rest;
+            //else{
+                //current= current.rest;
+            //}
         }
         return name_list;
     }
@@ -209,12 +210,13 @@ public class MainGUI extends JFrame {
             // ... code here ..
             session session1 = searchByID(id);
             if (session1!=null){
-                outputArea.append("ID: "+session1.Id+" - ");
-                outputArea.append("Title: "+session1.title+" - ");
-                outputArea.append("Mentor: "+session1.mentor+" - ");
-                outputArea.append("Date: "+session1.date+" - ");
-                outputArea.append("Location: "+session1.location+" - ");
-                outputArea.append("Max_participants: "+session1.maxParticipants+" - ");
+                outputArea.setText("\nID: "+session1.Id+" - ");
+                outputArea.append("\nTitle: "+session1.title+" - ");
+                outputArea.append("\nMentor: "+session1.mentor+" - ");
+                outputArea.append("\nDate: "+session1.date+" - ");
+                outputArea.append("\nLocation: "+session1.location+" - ");
+                outputArea.append("\nMax_participants: "+session1.maxParticipants+" - ");
+
             }
 
             /* if (result != null)
@@ -232,12 +234,14 @@ public class MainGUI extends JFrame {
             // ... code here ...
             session_list session2 = searchByMentor(mentor);
             while (session2!=null){
-                outputArea.append("ID: "+session2.first.Id+" - ");
-                outputArea.append("Title: "+session2.first.title+" - ");
-                outputArea.append("Mentor: "+session2.first.mentor+" - ");
-                outputArea.append("Date: "+session2.first.date+" - ");
-                outputArea.append("Location: "+session2.first.location+" - ");
-                outputArea.append("Max_participants: "+session2.first.maxParticipants+" - ");
+                outputArea.setText("\nID: "+session2.first.Id+" - ");
+                outputArea.append("\nTitle: "+session2.first.title+" - ");
+                outputArea.append("\nMentor: "+session2.first.mentor+" - ");
+                outputArea.append("\nDate: "+session2.first.date+" - ");
+                outputArea.append("\nLocation: "+session2.first.location+" - ");
+                outputArea.append("\nMax_participants: "+session2.first.maxParticipants+" - ");
+
+                session2 = session2.rest;
             }
             /*
             if (result != null)
@@ -257,11 +261,13 @@ public class MainGUI extends JFrame {
         if (list==null){
             return null;
         }
-        else if (list.first.Id==id){
+        else if (list.first.Id == id){
             return list.rest;
+        } else {
+            return new session_list(list.first, removeByID(list.rest,id));
         }
-        session= new session_list(list.first, removeByID(list.rest,id));
-        return new session_list(list.first, removeByID(list.rest,id));
+        //session= new session_list(list.first, removeByID(list.rest,id));
+        //return new session_list(list.first, removeByID(list.rest,id));
     }
     private void removeSession() {
         int id = Integer.parseInt(idField.getText());
@@ -269,10 +275,13 @@ public class MainGUI extends JFrame {
         // if it's not found
         // ... code here ...
         if (searchByID(id)!=null){
-            outputArea.append("error:session id not found");
+            session = removeByID(session, id);
+            outputArea.setText("session removed");
+            //outputArea.append("session removed");
         }
         else{
-            removeByID(session,id);
+            outputArea.setText("session id not found");
+            //removeByID(session,id);
         }
 
     }
@@ -288,18 +297,19 @@ public class MainGUI extends JFrame {
             if (current.first.Id==id){
                 if (current.first.participants<current.first.maxParticipants){
                     current.first.participants+=1;
-
+                    outputArea.setText("Registered Successfully!!");
                 }
                 else{
-                    outputArea.append("amount of partcipants is max");
+                    outputArea.setText("amount of participants is max");
                 }
+                return;
 
             }
             else{
                 current=current.rest;
             }
         }
-
+        outputArea.setText("Session ID can't be found");
 
     }
 
